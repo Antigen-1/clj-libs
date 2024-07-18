@@ -6,10 +6,10 @@
   "Merge several sequences"
   [ss]
   {:pre [(sequential? ss) (simple-andmap sequential? ss)]}
-  (lazy-seq
-   (letfn [(loop
-             [ss]
+  (letfn [(loop
+            [ss]
+            (lazy-seq
              (if (simple-andmap seq ss)
                (cons (map first ss) (loop (map rest ss)))
-               '()))]
-     (loop ss))))
+               '())))]
+    (loop ss)))
