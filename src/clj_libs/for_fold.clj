@@ -1,6 +1,6 @@
 (ns clj-libs.for-fold
   (:gen-class)
-  (:use clj-libs.zip-seqs clj-libs.check-duplicates clj-libs.andmap))
+  (:use clj-libs.zip-seqs clj-libs.check-duplicates clj-libs.map-utils))
 
 (defn seq-of-len?
   [l t n]
@@ -23,7 +23,6 @@
         inits (map second `~accs)
         itr-ids (map first `~itrs)
         seqs (map second `~itrs)
-        sym `result#
         len (count `~accs)
 
         all (into acc-ids itr-ids)
@@ -33,8 +32,8 @@
             (str "Duplicate names:" dups))
 
     `(reduce (fn [[~@acc-ids] [~@itr-ids]]
-               (let [~sym (let [] ~@body)]
-                (assert (seq-of-len? ~sym vector? ~len) (str "Invalid result:" ~sym))
-                ~sym))
+               (let [res# (let [] ~@body)]
+                 (assert (seq-of-len? res# vector? ~len) (str "Invalid result:" res#))
+                 res#))
              [~@inits]
              (zip (list ~@seqs)))))

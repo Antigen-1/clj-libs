@@ -1,6 +1,6 @@
 (ns clj-libs.foldr
   (:use clj-libs.private.simple-foldr
-        clj-libs.andmap
+        clj-libs.map-utils
         clj-libs.zip-seqs))
 
 (defn foldr

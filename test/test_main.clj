@@ -1,13 +1,13 @@
 (ns test-main
   (:require [for-fold-test :as fft]
             [check-duplicates-test :as cdt]
-            [andmap-test :as at]
+            [map-utils-test :as mut]
             [zip-seqs-test :as zst]
             [foldr-test :as ft]))
 
 (defn -main []
   (fft/-main)
   (cdt/-main)
-  (at/-main)
+  (mut/-main)
   (zst/-main)
   (ft/-main))

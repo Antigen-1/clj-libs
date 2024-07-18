@@ -1,6 +1,6 @@
 (ns clj-libs.zip-seqs
   (:gen-class)
-  (:use clj-libs.private.simple-andmap))
+  (:use clj-libs.private.simple-map-utils))
 
 (defn zip
   "Merge several sequences"
