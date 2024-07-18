@@ -3,7 +3,7 @@
             [check-duplicates-test :as cdt]
             [map-utils-test :as mut]
             [zip-seqs-test :as zst]
-            [foldr-test :as ft]))
+            [fold-test :as ft]))
 
 (defn -main []
   (fft/-main)

@@ -4,7 +4,7 @@
 (defn check-duplicates
   "Check duplicates in the sequence"
   [s]
-  {:pre [(sequential? s)]}
+  {:pre [(coll? s)]}
   (loop [old (transient #{})
          sq s
          ret (transient #{})]

@@ -5,7 +5,7 @@
 (defn zip
   "Merge several sequences"
   [ss]
-  {:pre [(sequential? ss) (simple-andmap sequential? ss)]}
+  {:pre [(coll? ss) (simple-andmap coll? ss)]}
   (letfn [(loop
             [ss]
             (lazy-seq
