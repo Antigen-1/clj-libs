@@ -6,10 +6,7 @@
   [l t n]
   {:pre [(and (integer? n) (pos? n))]}
   (and (t l)
-       (loop [n n
-              l l]
-         (or (and (zero? n) (empty? l))
-             (and (not (zero? n)) (seq l) (recur (dec n) (rest l)))))))
+       (= (count l) n)))
 
 (defmacro for-fold
   "Racket-style for-fold macro"
