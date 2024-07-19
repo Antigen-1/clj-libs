@@ -10,7 +10,7 @@
    (simple-foldr p i s))
   ([p i s0 s1 & ss]
    {:pre [(andmap coll? (conj ss s1 s0))]}
-   (foldr (fn [o l] (apply p o l)) i (zip (conj ss s1 s0)))))
+   (foldr (fn [l o] (apply p `(~@l ~o))) i (zip (conj ss s1 s0)))))
 (defn foldl
   "The foldl operator, which is like the reduce function except that it supports an arbitrary number of collections"
   ([p i s]

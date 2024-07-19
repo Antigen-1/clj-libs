@@ -3,5 +3,5 @@
 (defn simple-foldr
   [p i s]
   (if-let [[fst & rst] s]
-    (p (simple-foldr p i rst) fst)
+    (p fst (simple-foldr p i rst))
     i))
