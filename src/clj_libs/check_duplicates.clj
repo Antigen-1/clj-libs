@@ -8,7 +8,8 @@
   (loop [old (transient #{})
          sq s
          ret (transient #{})]
-    (cond
-      (empty? sq) (persistent! ret)
-      (contains? old (first sq)) (recur old (rest sq) (conj! ret (first sq)))
-      :else (recur (conj! old (first sq)) (rest sq) ret))))
+    (if-let [[fst & rst] sq]
+      (cond
+        (contains? old fst) (recur old rst (conj! ret fst))
+        :else (recur (conj! old fst) rst ret))
+      (persistent! ret))))

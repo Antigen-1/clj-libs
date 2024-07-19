@@ -3,9 +3,8 @@
 (defmacro ^:private map-helper
   [c p a s]
   `(loop [sq# ~s ac# ~a]
-     (if (seq sq#)
-       (let [[fst# & rst#] sq#
-             res# (~p fst#)]
+     (if-let [[fst# & rst#] sq#]
+       (let [res# (~p fst#)]
          (~c res# (recur rst# res#)))
        ac#)))
 

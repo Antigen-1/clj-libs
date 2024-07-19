@@ -2,6 +2,6 @@
 
 (defn simple-foldr
   [p i s]
-  (if (seq s)
-    (p (simple-foldr p i (rest s)) (first s))
+  (if-let [[fst & rst] s]
+    (p (simple-foldr p i rst) fst)
     i))
