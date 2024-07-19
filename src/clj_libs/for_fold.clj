@@ -15,13 +15,13 @@
         inits (map second `~accs)
         itr-ids (map first `~itrs)
         seqs (map second `~itrs)
-        len (count `~accs)
+        len (count `~accs)]
 
-        all (into acc-ids itr-ids)
-        dups (check-duplicates all)]
-
-    (assert (empty? dups)
-            (str "Duplicate names:" dups))
+    (doseq
+      [ids [acc-ids itr-ids]]
+      (let [dups (check-duplicates ids)]
+        (assert (empty? dups)
+                (str "Duplicate names:" dups))))
 
     `(reduce (fn [accs# itrs#]
                (if-let [[~@acc-ids] accs#]
@@ -31,4 +31,4 @@
                    res#)
                  (assert (= (count accs#) ~len) (str "Wrong number of accumulators:" accs#))))
              [~@inits]
-             (zip (list ~@seqs)))))
+             (zip [~@seqs]))))
