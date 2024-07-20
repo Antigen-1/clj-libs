@@ -4,4 +4,5 @@
         clj-libs.check-duplicates
         clj-libs.for-fold
         clj-libs.zip-seqs
-        clj-libs.fold))
+        clj-libs.fold
+        clj-libs.filter-utils))
