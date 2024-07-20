@@ -16,10 +16,7 @@
         itr-ids (map first itrs)
         seqs (map second itrs)
         acc-num (count accs)
-        itr-num (count itrs)
-
-        temp-ids (for [_ itr-ids] (gensym))
-        bindings (foldl (fn [o i1 i2] (cons i1 (cons i2 o))) '() (reverse itr-ids) (reverse temp-ids))]
+        itr-num (count itrs)]
 
     (doseq
       [ids [acc-ids itr-ids]]
