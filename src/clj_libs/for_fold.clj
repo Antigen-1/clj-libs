@@ -15,8 +15,7 @@
         inits (map second accs)
         itr-ids (map first itrs)
         seqs (map second itrs)
-        acc-num (count accs)
-        itr-num (count itrs)]
+        acc-num (count accs)]
 
     (doseq
       [ids [acc-ids itr-ids]]
@@ -25,48 +24,58 @@
                 (str "Duplicate names:" dups))))
 
     ;; Passes
-    (defn pre [acc-ids inits itr-ids seqs body]
-      (-> [acc-ids inits itr-ids seqs body]
-          ((fn [[ac in ii sq bd]]
+    (defn pre [acc-ids inits itr-ids seqs body v-ass? c-ass?]
+      (-> [acc-ids inits itr-ids seqs body v-ass? c-ass?]
+          ((fn [[ac in ii sq bd vs cs]]
              [`[~@ac]
               `[~@in]
-              `[~@ii]
+              ii
               sq
-              bd]))
+              bd
+              vs
+              cs]))
+
           ((fn [[a i & rst :as all]]
              (if (= acc-num 1)
-               (let [[sa] a [si] i]
-                 `[~sa ~si ~@rst])
+               `[~@a ~@i ~@rst]
                all)))
-          ((fn [[ac in ii sq bd :as all]]
-             (if (= itr-num 1)
-               (let [[si] ii [ss] sq]
-                 `[~ac ~in ~si [~ss] ~bd])
-               all)))))
-    (defn guard [form]
-      (-> form
-          ((fn [f]
-             (if (= acc-num 1)
-               `(let [[o#] ~f]
-                  o#)
-               f)))))
+          ((fn [[ac in ii sq bd vs cs :as all]]
+             (let [extract
+                   (fn [tail]
+                     `(let [[o# & r# :as a#] ~tail]
+                        (assert (vector? a#) (str "Results must be collected into a vector:" a#))
+                        (assert (empty? r#) (str "Wrong number of accumulators:" a#))
+                        o#))
+                   before-tail (drop-last bd)
+                   tail (last bd)]
+               (cond
+                 (and (= acc-num 1) (vector? tail) (= (count tail) 1))
+                 `[~ac ~in ~ii ~sq [~@before-tail ~@tail] false false]
+                 (= acc-num 1)
+                 `[~ac ~in ~ii ~sq [~@before-tail ~(extract tail)] false false]
+                 :else all))))))
     (defn post [form]
       (-> form
           ((fn [f] (if (= acc-num 1) `[~f] f)))))
 
     (let [[n-acc-ids ;; ~
            n-inits ;; ~
-           n-itr-ids ;; ~
+           n-itr-ids ;; ~@
            n-seqs ;; ~@
            n-body ;; ~@
-           ]
-          (pre acc-ids inits itr-ids seqs body)
+           n-v-ass?
+           n-c-ass?]
+          (pre acc-ids inits itr-ids seqs body true true)
           all `all#]
       (post
-       `(foldl (fn [~n-acc-ids ~n-itr-ids]
-                 (let [~all (let [] ~@n-body)]
-                   (assert (vector? ~all) (str "Results must be collected into a vector:" ~all))
-                   (assert (= (count ~all) ~acc-num) (str "Wrong number of accumulators:" ~all))
-                   ~(guard all)))
+       `(foldl (fn [~n-acc-ids ~@n-itr-ids]
+                   (let [~all (let [] ~@n-body)]
+                     ~@(if n-v-ass?
+                         `((assert (vector? ~all) (str "Results must be collected into a vector:" ~all)))
+                         `())
+                     ~@(if n-c-ass?
+                         `((assert (= (count ~all) ~acc-num) (str "Wrong number of accumulators:" ~all)))
+                         `())
+                     ~all))
                ~n-inits
                ~@n-seqs)))))
