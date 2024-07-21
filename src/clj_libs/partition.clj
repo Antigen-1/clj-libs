@@ -1,8 +1,9 @@
 (ns clj-libs.partition
+  (:refer-clojure :exclude [partition])
   (:use clj-libs.for-fold)
   (:gen-class))
 
-(defn part
+(defn partition
   "Similar to filter, except that a vector of two values is returned: the items for which the predicate returns a true value, and the items for which the predicate returns false or nil"
   [p s]
   {:pre [(fn? p) (coll? s)]}

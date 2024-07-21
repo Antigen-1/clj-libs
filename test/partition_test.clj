@@ -1,6 +1,6 @@
 (ns partition-test
-  (:use clj-libs.partition))
+  (:require [clj-libs.partition :as cp]))
 
 (defn -main
   []
-  (assert (= [[1 3] [2 4]] (part odd? [1 2 3 4]))))
+  (assert (= [[1 3] [2 4]] (cp/partition odd? [1 2 3 4]))))
