@@ -4,7 +4,9 @@
             [map-utils-test :as mut]
             [zip-seqs-test :as zst]
             [fold-test :as ft]
-            [filter-utils-test :as fut]))
+            [filter-utils-test :as fut]
+            [partition-test :as pt])
+  (:gen-class))
 
 (defn -main []
   (fft/-main)
@@ -12,4 +14,5 @@
   (mut/-main)
   (zst/-main)
   (ft/-main)
-  (fut/-main))
+  (fut/-main)
+  (pt/-main))
