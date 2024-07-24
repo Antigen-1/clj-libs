@@ -16,7 +16,7 @@
  [(sym '(andmap ormap check-duplicates zip foldr foldl filter-not filter-map filter-split partition ^:macro for-fold))
   (val [mu/andmap mu/ormap cd/check-duplicates zs/zip f/foldr f/foldl fu/filter-not fu/filter-map fu/filter-split p/partition @#'ff/for-fold])
   (var [#'mu/andmap #'mu/ormap #'cd/check-duplicates #'zs/zip #'f/foldr #'f/foldl #'fu/filter-not #'fu/filter-map #'fu/filter-split #'p/partition #'ff/for-fold])]
- [(intern 'clj-libs.lib
+ [(intern 'clj-libs.spec
           (with-meta sym (meta var))
           val)])
 
