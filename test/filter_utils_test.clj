@@ -1,5 +1,6 @@
 (ns filter-utils-test
-  (:use clj-libs.filter-utils))
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.lib))
 
 (defn -main []
   (assert (= '(2 4) (filter-not odd? '(1 2 3 4))))

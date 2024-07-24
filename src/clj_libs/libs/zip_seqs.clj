@@ -1,5 +1,4 @@
-(ns clj-libs.zip-seqs
-  (:gen-class)
+(ns clj-libs.libs.zip-seqs
   (:use clj-libs.private.simple-map-utils))
 
 (defn zip

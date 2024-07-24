@@ -1,5 +1,4 @@
-(ns clj-libs.check-duplicates
-  (:gen-class))
+(ns clj-libs.libs.check-duplicates)
 
 (defn check-duplicates
   "Check duplicates in the sequence"

@@ -1,6 +1,5 @@
-(ns clj-libs.filter-utils
-  (:use clj-libs.for-fold clj-libs.map-utils clj-libs.zip-seqs)
-  (:gen-class))
+(ns clj-libs.libs.filter-utils
+  (:use clj-libs.libs.for-fold clj-libs.libs.zip-seqs clj-libs.libs.map-utils))
 
 (defn filter-not
   "Like filter, except that elements are preserved when the predicate returns false or nil"

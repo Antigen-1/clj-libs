@@ -1,5 +1,6 @@
 (ns fold-test
-  (:use clj-libs.fold))
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.lib))
 
 (defn -main []
   (assert (= 10 (foldr + 0 '(0 1 2 3 4))))

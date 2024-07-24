@@ -1,5 +1,6 @@
 (ns check-duplicates-test
-  (:use clj-libs.check-duplicates))
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.lib))
 
 (defn -main []
   (assert (= (check-duplicates '(1 2 3 1)) #{1}))

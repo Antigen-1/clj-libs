@@ -1,5 +1,6 @@
 (ns map-utils-test
-  (:use clj-libs.map-utils))
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.lib))
 
 (defn -main []
   (assert (= (andmap + [1 2] [3 4]) 6))

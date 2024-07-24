@@ -1,8 +1,7 @@
-(ns clj-libs.fold
+(ns clj-libs.libs.fold
   (:use clj-libs.private.simple-foldr
-        clj-libs.map-utils
-        clj-libs.zip-seqs)
-  (:gen-class))
+        clj-libs.libs.zip-seqs
+        clj-libs.libs.map-utils))
 
 (defn foldr
   "The fold operator"

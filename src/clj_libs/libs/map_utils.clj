@@ -1,6 +1,5 @@
-(ns clj-libs.map-utils
-  (:gen-class)
-  (:use clj-libs.zip-seqs
+(ns clj-libs.libs.map-utils
+  (:use clj-libs.libs.zip-seqs
         clj-libs.private.simple-map-utils))
 
 (defn andmap

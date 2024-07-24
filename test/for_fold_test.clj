@@ -1,5 +1,6 @@
 (ns for-fold-test
-  (:use [clj-libs.for-fold :only (for-fold)]))
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.lib))
 
 (defn -main []
   (assert (= [9] (for-fold [(i 0)] ((i (range 10))) [i])))

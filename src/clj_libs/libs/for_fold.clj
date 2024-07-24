@@ -1,10 +1,9 @@
-(ns clj-libs.for-fold
-  (:gen-class)
-  (:use clj-libs.zip-seqs clj-libs.check-duplicates clj-libs.map-utils clj-libs.fold))
+(ns clj-libs.libs.for-fold
+  (:use clj-libs.libs.zip-seqs clj-libs.libs.check-duplicates clj-libs.libs.map-utils clj-libs.libs.fold))
 
 (defmacro for-fold
   "Racket-style for-fold macro"
-  [[& accs] [& itrs] & body]
+  [[& accs] [& itrs] body0 & body]
 
   (doseq
    [cl (into accs itrs)]
@@ -65,7 +64,7 @@
            n-body ;; ~@
            n-v-ass?
            n-c-ass?]
-          (pre acc-ids inits itr-ids seqs body true true)
+          (pre acc-ids inits itr-ids seqs (cons body0 body) true true)
           all `all#]
       (post
        `(foldl (fn [~n-acc-ids ~@n-itr-ids]
