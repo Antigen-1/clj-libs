@@ -6,4 +6,5 @@
 (stest/instrument 'clj-libs.spec/partition)
 
 (deftest -main
+  (is (= ['(1 3) '(2 4)] (partition odd? [1 2 3 4])))
   (is (= ['(() (1)) '([1 2])] (partition list? ['() '(1) [1 2]]))))

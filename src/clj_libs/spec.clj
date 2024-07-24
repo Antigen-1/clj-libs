@@ -23,39 +23,39 @@
 (s/def ::pred (s/fspec :args (s/cat :value any?) :ret any?))
 (s/def ::acc-or-itr (s/and list? (fn [s] (if-let [[fst rst] s] (symbol? fst) false))))
 
-(s/fdef andmap
+(s/fdef ::andmap
   :args (s/cat :predicate ::pred :collections (s/+ coll?)))
-(s/fdef ormap
+(s/fdef ::ormap
   :args (s/cat :predicate ::pred :collections (s/+ coll?)))
 
-(s/fdef check-duplicates
+(s/fdef ::check-duplicates
   :args (s/cat :collection coll?)
   :ret set?)
 
-(s/fdef zip
+(s/fdef ::zip
   :args (s/cat :collections (s/coll-of coll? :min-count 1))
   :ret coll?)
 
-(s/fdef foldr
+(s/fdef ::foldr
   :args (s/cat :procedure (s/fspec :args (s/cat :elements (s/+ any?) :accumulator any?)) :accumulator any? :collections (s/+ coll?)))
-(s/fdef foldl
+(s/fdef ::foldl
   :args (s/cat :procedure (s/fspec :args (s/cat :accumulator any? :elements (s/+ any?))) :accumulator any? :collections (s/+ coll?)))
 
-(s/fdef filter-not
+(s/fdef ::filter-not
   :args (s/cat :predicate ::pred :collection coll?)
   :ret coll?)
-(s/fdef filter-map
+(s/fdef ::filter-map
   :args (s/cat :predicate ::pred :collections (s/+ coll?))
   :ret coll?)
-(s/fdef filter-split
+(s/fdef ::filter-split
   :args (s/cat :predicate ::pred :collection coll?)
   :ret (s/coll-of list? :kind list?))
 
-(s/fdef partition
+(s/fdef ::partition
   :args (s/cat :predicate ::pred :collection coll?)
   :ret (s/tuple list? list?))
 
-(s/fdef ^:macro for-fold
+(s/fdef ^:macro clj-libs.spec/for-fold
   :args (s/cat :accumulators (s/coll-of ::acc-or-itr)
                :iterators (s/coll-of ::acc-or-itr)
                :body (s/+ any?)))
