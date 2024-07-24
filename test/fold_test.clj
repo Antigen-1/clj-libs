@@ -1,6 +1,9 @@
 (ns fold-test
   (:refer-clojure :exclude [partition])
-  (:use clj-libs.spec clojure.test))
+  (:use clj-libs.spec clojure.test)
+  (:require [clojure.spec.test.alpha :as stest]))
+
+(map stest/instrument '(clj-libs.spec/foldl clj-libs.spec/foldr))
 
 (deftest -main
   (is (= 10 (foldr + 0 '(0 1 2 3 4))))

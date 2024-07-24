@@ -20,8 +20,7 @@
           (with-meta sym (meta var))
           val)])
 
-(s/fdef ::pred :args (s/cat :value any?))
-(s/def ::colls (s/coll-of :min-count 1 coll?))
+(s/def ::pred (s/fspec :args (s/cat :value any?) :ret any?))
 (s/def ::acc-or-itr (s/and list? (fn [s] (if-let [[fst rst] s] (symbol? fst) false))))
 
 (s/fdef andmap
@@ -30,11 +29,11 @@
   :args (s/cat :predicate ::pred :collections (s/+ coll?)))
 
 (s/fdef check-duplicates
-  :args (s/cat :collections ::colls)
+  :args (s/cat :collection coll?)
   :ret set?)
 
 (s/fdef zip
-  :args (s/cat :collections ::colls)
+  :args (s/cat :collections (s/coll-of coll? :min-count 1))
   :ret coll?)
 
 (s/fdef foldr
@@ -50,11 +49,11 @@
   :ret coll?)
 (s/fdef filter-split
   :args (s/cat :predicate ::pred :collection coll?)
-  :ret (s/coll-of :kind list? list?))
+  :ret (s/coll-of list? :kind list?))
 
 (s/fdef partition
   :args (s/cat :predicate ::pred :collection coll?)
-  :ret (s/coll-of :kind vector? :count 2 list?))
+  :ret (s/tuple list? list?))
 
 (s/fdef ^:macro for-fold
   :args (s/cat :accumulators (s/coll-of ::acc-or-itr)

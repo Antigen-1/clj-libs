@@ -1,6 +1,9 @@
 (ns map-utils-test
   (:refer-clojure :exclude [partition])
-  (:use clj-libs.spec clojure.test))
+  (:use clj-libs.spec clojure.test)
+  (:require [clojure.spec.test.alpha :as stest]))
+
+(map stest/instrument '(clj-libs.spec/andmap clj-libs.spec/ormap))
 
 (deftest -main
   (is (= (andmap + [1 2] [3 4]) 6))
