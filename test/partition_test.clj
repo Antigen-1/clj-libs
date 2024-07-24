@@ -1,6 +1,6 @@
 (ns partition-test
   (:refer-clojure :exclude [partition])
-  (:use clj-libs.lib))
+  (:use clj-libs.spec))
 
 (defn -main
   []

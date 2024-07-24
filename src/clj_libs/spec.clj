@@ -1,4 +1,4 @@
-(ns clj-libs.lib
+(ns clj-libs.spec
   (:gen-class)
   (:refer-clojure :exclude [partition])
   (:require [clj-libs.libs.map-utils :as mu]
