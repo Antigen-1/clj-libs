@@ -1,19 +1,17 @@
 (ns test-main
-  (:require [for-fold-test :as fft]
-            [check-duplicates-test :as cdt]
-            [map-utils-test :as mut]
-            [zip-seqs-test :as zst]
-            [fold-test :as ft]
-            [filter-utils-test :as fut]
-            [partition-test :as pt])
-  (:use clojure.test)
+  (:refer-clojure :exclude [partition])
+  (:use clj-libs.spec)
+  (:require [clojure.spec.test.alpha :as stest])
   (:gen-class))
 
-(deftest -main
-  (fft/-main)
-  (cdt/-main)
-  (mut/-main)
-  (zst/-main)
-  (ft/-main)
-  (fut/-main)
-  (pt/-main))
+(defn -main []
+  (for-fold
+   ((_ nil))
+   ((sym '(clj-libs.spec/partition
+           clj-libs.spec/check-duplicates
+           clj-libs.spec/filter-not clj-libs.spec/filter-map clj-libs.spec/filter-split
+           clj-libs.spec/andmap clj-libs.spec/ormap
+           clj-libs.spec/foldr clj-libs.spec/foldl
+           ^:macro clj-libs.spec/for-fold
+           clj-libs.spec/zip)))
+   [(stest/check sym)]))
