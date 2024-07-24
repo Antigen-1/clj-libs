@@ -6,9 +6,10 @@
             [fold-test :as ft]
             [filter-utils-test :as fut]
             [partition-test :as pt])
+  (:use clojure.test)
   (:gen-class))
 
-(defn -main []
+(deftest -main
   (fft/-main)
   (cdt/-main)
   (mut/-main)
