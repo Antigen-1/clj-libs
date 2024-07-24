@@ -46,7 +46,7 @@
   :args (s/cat :predicate ::pred :collection coll?)
   :ret coll?)
 (s/fdef filter-map
-  :args (s/cat :predicate ::pred :collection coll?)
+  :args (s/cat :predicate ::pred :collections (s/+ coll?))
   :ret coll?)
 (s/fdef filter-split
   :args (s/cat :predicate ::pred :collection coll?)
