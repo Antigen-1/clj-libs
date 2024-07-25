@@ -21,7 +21,7 @@
           val)])
 
 (s/def ::pred (s/fspec :args (s/cat :value any?) :ret any?))
-(s/def ::acc-or-itr (s/and list? (fn [s] (if-let [[fst rst] s] (symbol? fst) false))))
+(s/def ::acc-or-itr (s/cat :id symbol? :value any?))
 
 (s/fdef clj-libs.spec/andmap
   :args (s/cat :predicate ::pred :collections (s/+ coll?)))

@@ -7,7 +7,7 @@
 
   (doseq
    [cl (into accs itrs)]
-    (assert (and (list? cl) (= (count cl) 2) (symbol? (first cl)))
+    (assert (and (coll? cl) (= (count cl) 2) (symbol? (first cl)))
             (str "Invalid accumulator or iterator:" cl)))
 
   (let [acc-ids (map first accs)
